@@ -8,7 +8,7 @@ import plotly.express as px
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix
 
-project = ""
+about = "This streamlit app was created to help machine learning beginners and coders who would like to contribute.\nMy motivation is to give a hint to a curios friend of mine about machine learning in a basic and sharable way. For now, there are limited dataset and model options, if you would like to increase these, any contributions are welcome!"
 
 st.set_page_config(layout="centered", page_icon="♥")
 
@@ -23,9 +23,13 @@ with st.sidebar:
 
 if model_option == "None":
     if dataset_option == "None":
-        st.header("Project")
-        st.write(project)
-
+        st.header("About")
+        st.write(about)
+        st.markdown("<a href='https://github.com/erdemaysenur/ml-streamlit'>Repo</a>", unsafe_allow_html=True)
+        st.header("Datasets")
+        st.write("There are 3 different dataset for now and to load them I used sklearn.datasets class."+"\n"+"Available datasets:"+"\n"+"- Iris"+"\n"+"- MNIST"+"\n"+"- Wine"+"\n"+"For more information select dataset in the sidebar you'd like to know about.")
+        st.header("Models")
+        st.write("There are 3 model imported from sklearn to train the dataset you chose."+"\n"+"- Support Vector Machines"+"\n"+"- Decision Tree"+"\n"+"- Random Forests"+"\n"+"After choosing dataset and model from sidebar, click 'Start Training' button and when model trained, classification report and confusion matrix will be shown below.")
     elif dataset_option == "Iris":
         st.header("IRIS")
         st.subheader("Description")
@@ -122,7 +126,7 @@ if model_option == "None":
         st.plotly_chart(fig)
 
 elif model_option == "Support Vector Machines":
-    st.header("Models")
+    st.header("Support Vactor Machines")
     st.write("ldfkgtjıefokwpldğş")
     st.header("Train")
     st.write(f"Your choice of dataset: {dataset_option}")
