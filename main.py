@@ -3,10 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 plt.style.use("ggplot")
-from functions import load_dataset, load_page
+from functions import load_dataset, load_page, load_model_page
 import plotly.express as px
-from sklearn.svm import SVC
-from sklearn.metrics import classification_report, confusion_matrix
 
 about = "This streamlit app was created to help machine learning beginners and coders who would like to contribute.\nMy motivation is to give a hint to a curios friend of mine about machine learning in a basic and sharable way. For now, there are limited dataset and model options, if you would like to increase these, any contributions are welcome!"
 
@@ -126,24 +124,7 @@ if model_option == "None":
         st.plotly_chart(fig)
 
 elif model_option == "Support Vector Machines":
-    st.header("Support Vactor Machines")
-    st.write("ldfkgtjıefokwpldğş")
-    st.header("Train")
-    st.write(f"Your choice of dataset: {dataset_option}")
-    data, X, y = load_dataset(dataset_option)
-    train = st.button("Start training")
-    if train:
-        model = SVC()
-        model.fit(X.values, y.values)
-        train_preds = model.predict(X.values)
-        st.subheader("Report")
-        cr = pd.DataFrame(classification_report(y.values, train_preds, output_dict=True))
-        st.dataframe(cr)
-        cm = confusion_matrix(y.values, train_preds)
-        fig, ax = plt.subplots()
-        plt.title("Confusion Matrix", fontsize=14)
-        ax = sns.heatmap(cm, annot=True, fmt=".2f")
-        st.pyplot(fig)
+    load_model_page(dataset_option, model_option, "Model desc")
 
 
 
