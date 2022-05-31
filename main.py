@@ -4,9 +4,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 plt.style.use("ggplot")
 from functions import load_dataset, load_page, load_model_page
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 import plotly.express as px
 
 about = "This streamlit app was created to help machine learning beginners and coders who would like to contribute.\nMy motivation is to give a hint to a curios friend of mine about machine learning in a basic and sharable way. For now, there are limited dataset and model options, if you would like to increase these, any contributions are welcome!"
+svc_desc = "In machine learning, support-vector machines (SVMs, also support-vector networks) are supervised learning models with associated learning algorithms that analyze data for classification and regression analysis. Developed at AT&T Bell Laboratories by Vladimir Vapnik with colleagues (Boser et al., 1992, Guyon et al., 1993, Cortes and Vapnik, 1995, Vapnik et al., 1997) SVMs are one of the most robust prediction methods, being based on statistical learning frameworks or VC theory proposed by Vapnik (1982, 1995) and Chervonenkis (1974). Given a set of training examples, each marked as belonging to one of two categories, an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier (although methods such as Platt scaling exist to use SVM in a probabilistic classification setting). SVM maps training examples to points in space so as to maximise the width of the gap between the two categories. New examples are then mapped into that same space and predicted to belong to a category based on which side of the gap they fall. In addition to performing linear classification, SVMs can efficiently perform a non-linear classification using what is called the kernel trick, implicitly mapping their inputs into high-dimensional feature spaces."
+dt_desc = "A decision tree is a flowchart-like structure in which each internal node represents a 'test' on an attribute (e.g. whether a coin flip comes up heads or tails), each branch represents the outcome of the test, and each leaf node represents a class label (decision taken after computing all attributes). The paths from root to leaf represent classification rules. In decision analysis, a decision tree and the closely related influence diagram are used as a visual and analytical decision support tool, where the expected values (or expected utility) of competing alternatives are calculated."
 
 st.set_page_config(layout="centered", page_icon="♥")
 
@@ -17,7 +22,7 @@ with st.sidebar:
 
     st.subheader("MODEL")
     model_option = st.selectbox(label="",
-                                options=("None", "Support Vector Machines", "Decision Tree", "Random Forests"))
+                                options=("None", "Support Vector Machine", "Decision Tree", "Random Forest"))
 
 if model_option == "None":
     if dataset_option == "None":
@@ -123,8 +128,20 @@ if model_option == "None":
         fig = px.pie(names=y.value_counts().index, values=y.value_counts().to_numpy(), title='Target Distributions', template="ggplot2")
         st.plotly_chart(fig)
 
-elif model_option == "Support Vector Machines":
-    load_model_page(dataset_option, model_option, "Model desc")
+elif model_option == "Support Vector Machine":
+    st.header(model_option)
+    model = SVC()
+    load_model_page(dataset_option, model, svc_desc)
+
+elif model_option == "Decision Tree":
+    st.header(model_option)
+    model = DecisionTreeClassifier()
+    load_model_page(dataset_option, model, dt_desc)
+
+elif model_option == "Random Forest":
+    st.header(model_option)
+    model = RandomForestClassifier()
+    load_model_page(dataset_option, model, svc_desc)
 
 
 
