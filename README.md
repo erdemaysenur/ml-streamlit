@@ -19,3 +19,5 @@ This project has a long way to go so, any contributions are welcome.
 - Creating a Python dictionary or json file for Datasets and Models and ensuring that the definitions corresponding to the model and dataset are called with functions while the page is loaded.
 - Adding more comprehensive definitions and descriptions for models and datasets.
 - Adding new models and datasets.
+- Changing theme.
+- More EDA
